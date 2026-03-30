@@ -6,14 +6,7 @@ import DraggableGuest from "../components/DraggableGuest";
 import UndoButton from "../components/UndoButton";
 
 export default function Dashboard() {
-  const {
-    tables,
-    guests,
-    seating,
-    loading,
-    moveGuest,
-    undo,
-  } = useSeating();
+  const { tables, guests, seating, loading, moveGuest, undo } = useSeating();
 
   const [wedding, setWedding] = useState({
     couple_names: "",
@@ -55,7 +48,6 @@ export default function Dashboard() {
     <div style={{ padding: "20px" }}>
       <h1>Raspored sjedenja</h1>
 
-      {/* PDF download bez previewa */}
       <button
         onClick={() =>
           (window.location.href = "/.netlify/functions/exportPdf")
@@ -67,7 +59,7 @@ export default function Dashboard() {
           borderRadius: "6px",
           color: "white",
           border: "none",
-          fontWeight: "bold"
+          fontWeight: "bold",
         }}
       >
         Preuzmi PDF
@@ -83,7 +75,6 @@ export default function Dashboard() {
           marginTop: "40px",
         }}
       >
-        {/* STOL + GOSTI */}
         <div>
           <h2>Stolovi i gosti</h2>
 
@@ -98,7 +89,6 @@ export default function Dashboard() {
           ))}
         </div>
 
-        {/* LISTA GOSTIJU */}
         <div>
           <h2>Lista svih gostiju</h2>
 
