@@ -4,7 +4,6 @@ import useSeating from "../hooks/useSeating";
 import SeatingTable from "../components/SeatingTable";
 import DraggableGuest from "../components/DraggableGuest";
 import UndoButton from "../components/UndoButton";
-import PrintPreview from "../pdf/PrintPreview";
 
 export default function Dashboard() {
   const {
@@ -16,10 +15,6 @@ export default function Dashboard() {
     undo,
   } = useSeating();
 
-  // PRINT PREVIEW
-  const [previewOpen, setPreviewOpen] = useState(false);
-
-  // WEDDING INFO
   const [wedding, setWedding] = useState({
     couple_names: "",
     wedding_date: "",
@@ -42,7 +37,6 @@ export default function Dashboard() {
     loadWedding();
   }, []);
 
-  // DRAG&DROP – spremanje id-a gosta
   const handleDragStart = (guestId) => {
     localStorage.setItem("drag-guest", guestId);
   };
@@ -55,27 +49,32 @@ export default function Dashboard() {
     }
   };
 
-  if (loading) return <h2>Učitavanje podataka...</h2>;
+  if (loading) return <h2>Učitavanje...</h2>;
 
   return (
     <div style={{ padding: "20px" }}>
       <h1>Raspored sjedenja</h1>
 
-      {/* GUMB ZA PRINT PREVIEW */}
+      {/* PDF download bez previewa */}
       <button
-        onClick={() => setPreviewOpen(true)}
+        onClick={() =>
+          (window.location.href = "/.netlify/functions/exportPdf")
+        }
         style={{
           background: wedding.theme_color || "#b8860b",
           marginBottom: "20px",
+          padding: "10px 14px",
+          borderRadius: "6px",
+          color: "white",
+          border: "none",
+          fontWeight: "bold"
         }}
       >
-        Pregled prije ispisa
+        Preuzmi PDF
       </button>
 
-      {/* UNDO GUMB */}
       <UndoButton onUndo={undo} />
 
-      {/* GLAVNI GRID – stolovi lijevo, gosti desno */}
       <div
         style={{
           display: "grid",
@@ -99,7 +98,7 @@ export default function Dashboard() {
           ))}
         </div>
 
-        {/* LISTA SVIH GOSTIJU */}
+        {/* LISTA GOSTIJU */}
         <div>
           <h2>Lista svih gostiju</h2>
 
@@ -112,20 +111,6 @@ export default function Dashboard() {
           ))}
         </div>
       </div>
-
-      {/* PRINT PREVIEW MODAL */}
-      {previewOpen && (
-        <PrintPreview
-          wedding={wedding}
-          tables={tables}
-          guests={guests}
-          seating={seating}
-          onClose={() => setPreviewOpen(false)}
-          onDownload={() =>
-            (window.location.href = "/.netlify/functions/exportPdf")
-          }
-        />
-      )}
     </div>
   );
 }
