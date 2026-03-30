@@ -8,12 +8,13 @@ export default function DraggableGuest({ guest, onDragStart }) {
       draggable
       onDragStart={beginDrag}
       style={{
-        padding: "8px 10px",
-        border: "1px solid #ccc",
+        padding: "10px",
+        border: "2px solid #b8860b",
+        borderRadius: "8px",
         background: "white",
-        borderRadius: "6px",
-        marginBottom: "6px",
+        marginBottom: "8px",
         cursor: "grab",
+        fontWeight: "600",
       }}
     >
       {guest.first_name} {guest.last_name}
