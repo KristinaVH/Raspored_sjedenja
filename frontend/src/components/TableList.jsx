@@ -4,10 +4,7 @@ export default function TableList() {
   const [tables, setTables] = useState([]);
 
   async function loadTables() {
-    const res = await fetch("/.netlify/functions/tables", {
-      headers: { Authorization: `Bearer ${localStorage.getItem("sb-token")}` },
-    });
-
+    const res = await fetch("/.netlify/functions/tables");
     const data = await res.json();
     setTables(data);
   }
@@ -18,7 +15,7 @@ export default function TableList() {
 
   return (
     <div>
-      {tables.length === 0 && <p>Nema još stolova.</p>}
+      {tables.length === 0 && <p>Nema unesenih stolova.</p>}
 
       {tables.map((t) => (
         <div
