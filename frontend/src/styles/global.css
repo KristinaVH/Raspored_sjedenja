@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f7f7f7;
+  color: #333;
+}
+
+h1, h2, h3 {
+  color: #b8860b; /* elegantna zlatna */
+}
+
+button {
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  background: #b8860b;
+  color: white;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #946e08;
+}
+
+a {
+  color: #b8860b;
+  text-decoration: none;
+}
+
+input {
+  padding: 10px;
+  margin: 6px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
