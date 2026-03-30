@@ -9,12 +9,9 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        {/* Public routes */}
         <Route path="/" element={<Login />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/update-password" element={<UpdatePassword />} />
-
-        {/* Protected route (admin) */}
         <Route
           path="/dashboard"
           element={
