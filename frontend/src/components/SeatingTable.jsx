@@ -21,7 +21,7 @@ export default function SeatingTable({ table, guests, seating, onDropGuest }) {
     >
       <h3>Stol {table.name}</h3>
 
-      {assigned.length === 0 && <p style={{ color: "#888" }}>(prazno)</p>}
+      {assigned.length === 0 && <p style={{ color: "#888" }}>(prazan stol)</p>}
 
       {assigned.map((g) => (
         <div
