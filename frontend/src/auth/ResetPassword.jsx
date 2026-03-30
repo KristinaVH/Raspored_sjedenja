@@ -13,8 +13,8 @@ export default function ResetPassword() {
       redirectTo: window.location.origin + "/update-password",
     });
 
-    if (error) setMsg(error.message);
-    else setMsg("Provjerite svoj email za reset lozinke.");
+    if (error) setMsg("Greška: " + error.message);
+    else setMsg("Provjerite email – poslali smo poveznicu za reset lozinke.");
   }
 
   return (
@@ -24,13 +24,13 @@ export default function ResetPassword() {
       <form onSubmit={handleReset}>
         <input
           type="email"
-          placeholder="Vaš email"
+          placeholder="Upišite svoju email adresu"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
 
-        <button type="submit">Pošalji link za reset</button>
+        <button type="submit">Pošalji poveznicu</button>
       </form>
 
       {msg && <p style={{ marginTop: "15px" }}>{msg}</p>}
