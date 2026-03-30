@@ -1,0 +1,62 @@
+.preview-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.preview-box {
+  width: 70%;
+  max-height: 90%;
+  overflow-y: auto;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.preview-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.preview-logo {
+  display: block;
+  margin: 0 auto 20px;
+  max-width: 120px;
+}
+
+.preview-names {
+  text-align: center;
+  font-size: 24px;
+  color: #b8860b;
+}
+
+.preview-date {
+  text-align: center;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.preview-table {
+  margin-top: 20px;
+}
+
+.preview-table h3 {
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.preview-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.preview-empty {
+  color: #aaa;
+  font-style: italic;
+}
