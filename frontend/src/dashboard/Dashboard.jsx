@@ -16,7 +16,10 @@ export default function Dashboard() {
     undo,
   } = useSeating();
 
+  // PRINT PREVIEW
   const [previewOpen, setPreviewOpen] = useState(false);
+
+  // WEDDING INFO
   const [wedding, setWedding] = useState({
     couple_names: "",
     wedding_date: "",
@@ -32,13 +35,14 @@ export default function Dashboard() {
     });
 
     const data = await res.json();
-    setWedding(data);
+    if (data) setWedding(data);
   }
 
   useEffect(() => {
     loadWedding();
   }, []);
 
+  // DRAG&DROP – spremanje id-a gosta
   const handleDragStart = (guestId) => {
     localStorage.setItem("drag-guest", guestId);
   };
@@ -57,6 +61,7 @@ export default function Dashboard() {
     <div style={{ padding: "20px" }}>
       <h1>Raspored sjedenja</h1>
 
+      {/* GUMB ZA PRINT PREVIEW */}
       <button
         onClick={() => setPreviewOpen(true)}
         style={{
@@ -67,18 +72,22 @@ export default function Dashboard() {
         Pregled prije ispisa
       </button>
 
+      {/* UNDO GUMB */}
       <UndoButton onUndo={undo} />
 
+      {/* GLAVNI GRID – stolovi lijevo, gosti desno */}
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "2fr 1fr",
-          gap: "30px",
-          marginTop: "30px",
+          gap: "40px",
+          marginTop: "40px",
         }}
       >
+        {/* STOL + GOSTI */}
         <div>
-          <h2>Stolovi</h2>
+          <h2>Stolovi i gosti</h2>
+
           {tables.map((t) => (
             <SeatingTable
               key={t.id}
@@ -90,8 +99,10 @@ export default function Dashboard() {
           ))}
         </div>
 
+        {/* LISTA SVIH GOSTIJU */}
         <div>
-          <h2>Gosti</h2>
+          <h2>Lista svih gostiju</h2>
+
           {guests.map((g) => (
             <DraggableGuest
               key={g.id}
@@ -102,6 +113,7 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* PRINT PREVIEW MODAL */}
       {previewOpen && (
         <PrintPreview
           wedding={wedding}
@@ -110,7 +122,7 @@ export default function Dashboard() {
           seating={seating}
           onClose={() => setPreviewOpen(false)}
           onDownload={() =>
-            window.location.href = "/.netlify/functions/exportPdf"
+            (window.location.href = "/.netlify/functions/exportPdf")
           }
         />
       )}
