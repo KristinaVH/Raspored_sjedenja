@@ -13,24 +13,30 @@ export default function SeatingTable({ table, guests, seating, onDropGuest }) {
       onDrop={() => onDropGuest(table.id)}
       style={{
         padding: "15px",
-        border: "2px solid #b8860b",
+        border: "3px dashed #b8860b",
         borderRadius: "10px",
         marginBottom: "20px",
-        background: "white",
+        background: "#fff9e6",
       }}
     >
-      <h3>Stol {table.name}</h3>
+      <h3 style={{ marginTop: 0 }}>Stol {table.name}</h3>
 
-      {assigned.length === 0 && <p style={{ color: "#888" }}>(prazan stol)</p>}
+      {assigned.length === 0 && (
+        <p style={{ color: "#999", fontStyle: "italic" }}>
+          (povucite gosta ovdje)
+        </p>
+      )}
 
       {assigned.map((g) => (
         <div
           key={g.id}
           style={{
-            padding: "5px 10px",
+            padding: "6px 10px",
             border: "1px solid #ddd",
+            marginBottom: "6px",
             borderRadius: "6px",
-            marginBottom: "4px",
+            background: "white",
+            fontWeight: "500",
           }}
         >
           {g.first_name} {g.last_name}
