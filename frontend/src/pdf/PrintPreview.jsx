@@ -20,9 +20,13 @@ export default function PrintPreview({
 
         <h1 className="preview-title">Raspored sjedenja</h1>
 
-        {wedding.logo_url && (
-          {wedding.logo_url}
-        )}
+{wedding.logo_url && (
+  <img
+    src={wedding.logo_url}
+    alt="Logo"
+    className="preview-logo"
+  />
+)}
 
         <h2 className="preview-names">{wedding.couple_names}</h2>
         <p className="preview-date">{wedding.wedding_date}</p>
