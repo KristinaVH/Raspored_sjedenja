@@ -1,49 +1,24 @@
+import { Navigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-export default function Navbar() {
-  const navigate = useNavigate();
+export default function ProtectedRoute({ children }) {
+  const [session, setSession] = useState(undefined);
 
-  async function handleLogout() {
-    await supabase.auth.signOut();
-    navigate("/");
-  }
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+    });
 
-  return (
-    <div
-      style={{
-        width: "100%",
-        background: "#b8860b",
-        padding: "10px 20px",
-        color: "white",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        position: "sticky",
-        top: 0,
-        zIndex: 1000,
-      }}
-    >
-      <div
-        style={{ fontSize: "20px", fontWeight: "bold", cursor: "pointer" }}
-        onClick={() => navigate("/dashboard")}
-      >
-        Raspored sjedenja
-      </div>
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => setSession(session)
+    );
 
-      <div style={{ display: "flex", gap: "20px" }}>
-        <span style={{ cursor: "pointer" }} onClick={() => navigate("/dashboard")}>
-          Početna
-        </span>
+    return () => listener.subscription.unsubscribe();
+  }, []);
 
-        <span style={{ cursor: "pointer" }} onClick={() => navigate("/wedding-info")}>
-          Podaci o vjenčanju
-        </span>
+  if (session === undefined) return <div>Učitavanje...</div>;
+  if (!session) return <Navigate to="/" replace />;
 
-        <span style={{ cursor: "pointer" }} onClick={handleLogout}>
-          Odjava
-        </span>
-      </div>
-    </div>
-  );
+  return children;
 }
