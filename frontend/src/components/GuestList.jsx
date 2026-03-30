@@ -5,7 +5,9 @@ export default function GuestList() {
 
   async function loadGuests() {
     const res = await fetch("/.netlify/functions/guests", {
-      headers: { Authorization: `Bearer ${localStorage.getItem("sb-token")}` },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("sb-token")}`,
+      },
     });
 
     const data = await res.json();
@@ -18,7 +20,7 @@ export default function GuestList() {
 
   return (
     <div>
-      {guests.length === 0 && <p>Nema gostiju.</p>}
+      {guests.length === 0 && <p>Nema unesenih gostiju.</p>}
 
       {guests.map((g) => (
         <div
