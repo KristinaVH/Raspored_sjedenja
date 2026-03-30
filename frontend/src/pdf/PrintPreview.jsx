@@ -17,11 +17,8 @@ export default function PrintPreview({
   return (
     <div className="preview-overlay">
       <div className="preview-box">
-        <h1 className="preview-title">Raspored sjedenja</h1>
 
-        {wedding.logo_url ? (
-          {wedding.logo_url}
-        ) : null}
+        <h1 className="preview-title">Raspored sjedenja</h1>
 
         <h2 className="preview-names">{wedding.couple_names}</h2>
         <p className="preview-date">{wedding.wedding_date}</p>
@@ -55,6 +52,7 @@ export default function PrintPreview({
             Preuzmi PDF
           </button>
         </div>
+
       </div>
     </div>
   );
