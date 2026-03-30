@@ -18,7 +18,7 @@ export default function Login() {
     });
 
     if (error) {
-      setMsg(error.message);
+      setMsg("Neuspješna prijava: " + error.message);
     } else {
       navigate("/dashboard");
     }
@@ -26,7 +26,7 @@ export default function Login() {
 
   return (
     <div style={{ maxWidth: "400px", margin: "80px auto" }}>
-      <h1>Prijava</h1>
+      <h1>Prijava u sustav</h1>
 
       <form onSubmit={handleLogin}>
         <input
@@ -51,7 +51,7 @@ export default function Login() {
       </form>
 
       <p style={{ marginTop: "15px" }}>
-        <a href="/reset-password">Zaboravljena lozinka?</a>
+        /reset-password
       </p>
     </div>
   );
