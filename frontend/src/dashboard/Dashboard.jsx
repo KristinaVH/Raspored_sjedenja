@@ -7,7 +7,6 @@ import UndoButton from "../components/UndoButton";
 import PrintPreview from "../pdf/PrintPreview";
 
 export default function Dashboard() {
-  // Seating data & actions
   const {
     tables,
     guests,
@@ -17,10 +16,7 @@ export default function Dashboard() {
     undo,
   } = useSeating();
 
-  // UI state
   const [previewOpen, setPreviewOpen] = useState(false);
-
-  // Wedding info
   const [wedding, setWedding] = useState({
     couple_names: "",
     wedding_date: "",
@@ -28,7 +24,6 @@ export default function Dashboard() {
     logo_url: "",
   });
 
-  // Load wedding info from backend
   async function loadWedding() {
     const token = supabase.auth.getSession().data?.session?.access_token;
 
@@ -37,14 +32,13 @@ export default function Dashboard() {
     });
 
     const data = await res.json();
-    if (data) setWedding(data);
+    setWedding(data);
   }
 
   useEffect(() => {
     loadWedding();
   }, []);
 
-  // Drag handling
   const handleDragStart = (guestId) => {
     localStorage.setItem("drag-guest", guestId);
   };
@@ -57,13 +51,12 @@ export default function Dashboard() {
     }
   };
 
-  if (loading) return <h2>Učitavanje...</h2>;
+  if (loading) return <h2>Učitavanje podataka...</h2>;
 
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Raspored stolova</h1>
+      <h1>Raspored sjedenja</h1>
 
-      {/* PRINT PREVIEW BUTTON */}
       <button
         onClick={() => setPreviewOpen(true)}
         style={{
@@ -71,13 +64,11 @@ export default function Dashboard() {
           marginBottom: "20px",
         }}
       >
-        Print Preview
+        Pregled prije ispisa
       </button>
 
-      {/* UNDO BUTTON */}
       <UndoButton onUndo={undo} />
 
-      {/* MAIN LAYOUT */}
       <div
         style={{
           display: "grid",
@@ -86,7 +77,6 @@ export default function Dashboard() {
           marginTop: "30px",
         }}
       >
-        {/* TABLES SECTION */}
         <div>
           <h2>Stolovi</h2>
           {tables.map((t) => (
@@ -100,7 +90,6 @@ export default function Dashboard() {
           ))}
         </div>
 
-        {/* GUEST LIST */}
         <div>
           <h2>Gosti</h2>
           {guests.map((g) => (
@@ -113,7 +102,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* PRINT PREVIEW MODAL */}
       {previewOpen && (
         <PrintPreview
           wedding={wedding}
