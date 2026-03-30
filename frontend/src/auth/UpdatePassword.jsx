@@ -16,7 +16,7 @@ export default function UpdatePassword() {
     });
 
     if (error) {
-      setMsg(error.message);
+      setMsg("Greška: " + error.message);
     } else {
       setMsg("Lozinka je uspješno promijenjena! Preusmjeravam…");
       setTimeout(() => navigate("/"), 1500);
@@ -25,12 +25,12 @@ export default function UpdatePassword() {
 
   return (
     <div style={{ maxWidth: "400px", margin: "80px auto" }}>
-      <h1>Postavljanje nove lozinke</h1>
+      <h1>Nova lozinka</h1>
 
       <form onSubmit={handleUpdate}>
         <input
           type="password"
-          placeholder="Nova lozinka"
+          placeholder="Unesite novu lozinku"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
