@@ -10,16 +10,10 @@ export default function PrintPreview({ wedding, tables, guests, seating, onClose
   return (
     <div className="preview-overlay">
       <div className="preview-box">
-
-        {/* HEADER */}
-        <h1 className="preview-title">Raspored stolova</h1>
+        <h1 className="preview-title">Raspored sjedenja</h1>
 
         {wedding.logo_url && (
-          <img
-            src={wedding.logo_url}
-            alt="Logo"
-            className="preview-logo"
-          />
+          {wedding.logo_url}
         )}
 
         <h2 className="preview-names">{wedding.couple_names}</h2>
@@ -27,14 +21,13 @@ export default function PrintPreview({ wedding, tables, guests, seating, onClose
 
         <hr />
 
-        {/* TABLE LIST */}
         {tables.map((t) => (
           <div key={t.id} className="preview-table">
-            <h3>{`Stol ${t.name}`}</h3>
+            <h3>Stol {t.name}</h3>
 
             <ul>
               {guestsAtTable(t.id).length === 0 && (
-                <li className="preview-empty">(prazno)</li>
+                <li className="preview-empty">(nema gostiju)</li>
               )}
 
               {guestsAtTable(t.id).map((g) => (
@@ -46,7 +39,6 @@ export default function PrintPreview({ wedding, tables, guests, seating, onClose
           </div>
         ))}
 
-        {/* BUTTONS */}
         <div className="preview-buttons">
           <button onClick={onClose}>Zatvori</button>
           <button onClick={onDownload} style={{ background: "#b8860b" }}>
