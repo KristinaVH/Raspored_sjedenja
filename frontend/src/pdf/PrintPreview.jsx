@@ -27,10 +27,11 @@ export default function PrintPreview({
             src={wedding.logo_url}
             alt="Logo"
             className="preview-logo"
+            style={{ maxWidth: "120px", margin: "0 auto 20px", display: "block" }}
           />
         )}
 
-        {/* IMENA PARA I DATUM */}
+        {/* IMENA I DATUM */}
         <h2 className="preview-names">{wedding.couple_names}</h2>
         <p className="preview-date">{wedding.wedding_date}</p>
 
@@ -58,3 +59,14 @@ export default function PrintPreview({
         {/* GUMBI */}
         <div className="preview-buttons">
           <button onClick={onClose}>Zatvori</button>
+          <button
+            onClick={onDownload}
+            style={{ background: "#b8860b" }}
+          >
+            Preuzmi PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
