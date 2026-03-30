@@ -9,6 +9,7 @@ export default function WeddingInfo() {
     theme_color: "",
     logo_url: "",
   });
+
   const [msg, setMsg] = useState("");
 
   async function loadInfo() {
@@ -38,8 +39,7 @@ export default function WeddingInfo() {
       body: JSON.stringify(info),
     });
 
-    const data = await res.json();
-    setMsg("Podaci spremljeni!");
+    setMsg("Podaci uspješno spremljeni!");
   }
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export default function WeddingInfo() {
 
   return (
     <div style={{ maxWidth: "500px", marginTop: "20px" }}>
-      <h2>Informacije o vjenčanju</h2>
+      <h2>Podaci o vjenčanju</h2>
 
       <form onSubmit={saveInfo}>
 
@@ -56,9 +56,7 @@ export default function WeddingInfo() {
         <input
           type="text"
           value={info.couple_names}
-          onChange={(e) =>
-            setInfo({ ...info, couple_names: e.target.value })
-          }
+          onChange={(e) => setInfo({ ...info, couple_names: e.target.value })}
         />
 
         <label>Datum vjenčanja:</label>
@@ -66,22 +64,18 @@ export default function WeddingInfo() {
           type="text"
           placeholder="12. lipnja 2026."
           value={info.wedding_date}
-          onChange={(e) =>
-            setInfo({ ...info, wedding_date: e.target.value })
-          }
+          onChange={(e) => setInfo({ ...info, wedding_date: e.target.value })}
         />
 
-        <label>Boja PDF teme (HEX):</label>
+        <label>Boja PDF teme:</label>
         <input
           type="text"
           placeholder="#b8860b"
           value={info.theme_color}
-          onChange={(e) =>
-            setInfo({ ...info, theme_color: e.target.value })
-          }
+          onChange={(e) => setInfo({ ...info, theme_color: e.target.value })}
         />
 
-        <label>Logo:</label>
+        <label>Logo (slika):</label>
         <LogoUpload
           logoUrl={info.logo_url}
           onUpload={(url) => setInfo({ ...info, logo_url: url })}
