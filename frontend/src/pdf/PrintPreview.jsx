@@ -17,16 +17,11 @@ export default function PrintPreview({
   return (
     <div className="preview-overlay">
       <div className="preview-box">
-
         <h1 className="preview-title">Raspored sjedenja</h1>
 
-{wedding.logo_url && (
-  <img
-    src={wedding.logo_url}
-    alt="Logo"
-    className="preview-logo"
-  />
-)}
+        {wedding.logo_url ? (
+          {wedding.logo_url}
+        ) : null}
 
         <h2 className="preview-names">{wedding.couple_names}</h2>
         <p className="preview-date">{wedding.wedding_date}</p>
@@ -38,15 +33,15 @@ export default function PrintPreview({
             <h3>Stol {t.name}</h3>
 
             <ul>
-              {guestsAtTable(t.id).length === 0 && (
+              {guestsAtTable(t.id).length === 0 ? (
                 <li className="preview-empty">(nema gostiju)</li>
+              ) : (
+                guestsAtTable(t.id).map((g) => (
+                  <li key={g.id}>
+                    {g.first_name} {g.last_name}
+                  </li>
+                ))
               )}
-
-              {guestsAtTable(t.id).map((g) => (
-                <li key={g.id}>
-                  {g.first_name} {g.last_name}
-                </li>
-              ))}
             </ul>
           </div>
         ))}
@@ -60,7 +55,6 @@ export default function PrintPreview({
             Preuzmi PDF
           </button>
         </div>
-
       </div>
     </div>
   );
