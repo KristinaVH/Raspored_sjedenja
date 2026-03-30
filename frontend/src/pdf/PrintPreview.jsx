@@ -1,6 +1,13 @@
 import "./print.css";
 
-export default function PrintPreview({ wedding, tables, guests, seating, onClose, onDownload }) {
+export default function PrintPreview({
+  wedding,
+  tables,
+  guests,
+  seating,
+  onClose,
+  onDownload,
+}) {
   function guestsAtTable(tableId) {
     return seating
       .filter((s) => s.table_id === tableId)
@@ -10,21 +17,26 @@ export default function PrintPreview({ wedding, tables, guests, seating, onClose
   return (
     <div className="preview-overlay">
       <div className="preview-box">
+
+        {/* NASLOV */}
         <h1 className="preview-title">Raspored sjedenja</h1>
 
-{wedding.logo_url && (
-  <img
-    src={wedding.logo_url}
-    alt="Logo"
-    className="preview-logo"
-  />
-)}
+        {/* LOGO */}
+        {wedding.logo_url && (
+          <img
+            src={wedding.logo_url}
+            alt="Logo"
+            className="preview-logo"
+          />
+        )}
 
+        {/* IMENA PARA I DATUM */}
         <h2 className="preview-names">{wedding.couple_names}</h2>
         <p className="preview-date">{wedding.wedding_date}</p>
 
         <hr />
 
+        {/* STOL PO STOL */}
         {tables.map((t) => (
           <div key={t.id} className="preview-table">
             <h3>Stol {t.name}</h3>
@@ -43,13 +55,6 @@ export default function PrintPreview({ wedding, tables, guests, seating, onClose
           </div>
         ))}
 
+        {/* GUMBI */}
         <div className="preview-buttons">
           <button onClick={onClose}>Zatvori</button>
-          <button onClick={onDownload} style={{ background: "#b8860b" }}>
-            Preuzmi PDF
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
