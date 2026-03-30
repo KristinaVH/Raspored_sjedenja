@@ -18,26 +18,17 @@ export default function PrintPreview({
     <div className="preview-overlay">
       <div className="preview-box">
 
-        {/* NASLOV */}
         <h1 className="preview-title">Raspored sjedenja</h1>
 
-        {/* LOGO */}
         {wedding.logo_url && (
-          <img
-            src={wedding.logo_url}
-            alt="Logo"
-            className="preview-logo"
-            style={{ maxWidth: "120px", margin: "0 auto 20px", display: "block" }}
-          />
+          {wedding.logo_url}
         )}
 
-        {/* IMENA I DATUM */}
         <h2 className="preview-names">{wedding.couple_names}</h2>
         <p className="preview-date">{wedding.wedding_date}</p>
 
         <hr />
 
-        {/* STOL PO STOL */}
         {tables.map((t) => (
           <div key={t.id} className="preview-table">
             <h3>Stol {t.name}</h3>
@@ -56,7 +47,6 @@ export default function PrintPreview({
           </div>
         ))}
 
-        {/* GUMBI */}
         <div className="preview-buttons">
           <button onClick={onClose}>Zatvori</button>
           <button
@@ -66,6 +56,7 @@ export default function PrintPreview({
             Preuzmi PDF
           </button>
         </div>
+
       </div>
     </div>
   );
